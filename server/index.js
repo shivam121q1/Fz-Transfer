@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+const data = "this is a temporary data";
 // load evv file
 require('dotenv').config();
+
 
 
 const Profile = require('./router/Profile')
