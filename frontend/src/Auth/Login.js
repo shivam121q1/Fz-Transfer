@@ -1,9 +1,32 @@
 import React from 'react'
+import GoogleButton from 'react-google-button'
 
 const Login = () => {
   return (
-    <div>
-      this is loginpage
+    <div className='h-screen w-screen p-8 flex justify-center items-center'>
+        <div className='h-3/4 w-96 bg-white shadow-2xl p-4 border rounded-md'>
+          <h2 className='text-center text-2xl font-serif '>Login</h2>
+          
+          <div className='flex justify-center gap-4 m-4'>
+            <GoogleButton
+              type = 'dark'
+            />
+          </div>
+
+          <div className='flex gap-3 flex-col'>
+            <label>Email</label>
+            <input className='border p-4' type="text" placeholder='Enter Username' />
+          </div>
+
+          <div className='flex gap-3 flex-col mt-8'>
+            <label>Password</label>
+            <input className='border p-4' type="text" placeholder='Enter Username' />
+          </div>
+
+          <div className='flex justify-center'>
+            <button className='border p-2 mt-4 bg-blue-500 text-white rounded-md'>Login</button>
+          </div>
+        </div>
     </div>
   )
 }
