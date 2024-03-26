@@ -2,13 +2,38 @@
 
 
   "scripts": {
+
+
     "start": "node index.js",
+
+
     "dev": "nodemon index.js"
+
+
   },
+
+
   "dependencies": {
+
+
     "bcrypt": "^5.1.1",
+
+
     "express": "^4.19.1",
+
+
     "mongoose": "^8.2.3",
-    "nodemon": "^3.1.0"
+
+
+    "nodemon": "^3.1.0",
+
+
+    "otp-generator": "^4.0.1"
+
+
   }
+
+
 }
+
+

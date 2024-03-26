@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "otp-generator": "^4.0.1"
+  }
+}
