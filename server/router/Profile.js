@@ -7,8 +7,10 @@ const {Login, Signup} = require('../controller/Auth')
 
 // map router
 router.get("/Dashboard" , Dashboard);
-router.get("/Login",Login)
-router.get("/Signin",Signup)
+router.post("/Login",Login)
+router.post("/Signup",Signup)
+
+
 
 // export router
 module.exports = router;

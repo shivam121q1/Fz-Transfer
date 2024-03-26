@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./config/database")
+const cors = require('cors')
 
 const app = express();
 // load evv file
@@ -11,8 +12,9 @@ const Profile = require('./router/Profile')
 const PORT = process.env.PORT || 3000;
 db.connect();
 
+app.use(cors());
 app.use(express.json());
-app.use('/api' , Profile);
+app.use('/api/v1' , Profile);
 
 
 app.get('/' ,(req,res)=>{
