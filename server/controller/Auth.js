@@ -1,5 +1,5 @@
 const User = require("../model/User")
-
+const jwt = require('jsonwebtoken')
 exports.Login = async(req,res)=>{
     try{
         const {email , password} = req.body;
@@ -11,15 +11,21 @@ exports.Login = async(req,res)=>{
         }
         const user  = await User.findOne({ email });
         if(user){
+            const token = jwt.sign({
+                data: email,
+                exp: Math.floor(Date.now() + 24 * 60 * 60 * 1000),
+            } , 'secret' );
+
             return res.status(200).json({
                 success: true,
+                tokenId : token,
                 msg: "User Logged in Successfully",
             })
         }else{
             return res.status(400).json({
                 success: false,
                 msg : "Unable to login user need to Signup first",
-                err : e.message
+
             })
         }
     }catch(e){
