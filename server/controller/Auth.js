@@ -1,31 +1,43 @@
 const User = require("../model/User")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+require("dotenv").config();
 
 
 exports.Login = async(req,res)=>{
     try{
         const {email , password} = req.body;
+        console.log(email,password);
         if(!email || !password){
             return res.status(401).json({
                 success: false,
                 msg: "FIll all inputs",
             })
         }
-        const user  = await User.findOne({email});
+        console.log(email,password);
+        let user = await User.findOne(
+           
+                { email}
+        
+            );
+        
+        console.log(email,password);
+        console.log(user)
 
         if(!user){
             return res.status(401).json({
                 success:false,
                 msg:"User not exist Please register first"
+                
             })
         }
          //token generate,after password match 
+         console.log( await bcrypt.compare(password,user.password));
 
          if(await bcrypt.compare(password,user.password)){
 
             const payload ={
-                email: user.email,
+                email:user.email,
                 id:user._id,
                 
             }
@@ -69,7 +81,7 @@ exports.Signup = async(req,res)=>{
     try{
         const {email,password,confirmPassword,name,number} = req.body;
         if(!name ||!email || !password || !confirmPassword || !number){
-            return res.status(403).json({
+            return res.status(400).json({
                success:false,
                message:"All fields are required"
             })

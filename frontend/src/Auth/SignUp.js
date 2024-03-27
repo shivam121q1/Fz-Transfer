@@ -38,7 +38,7 @@ const SignUp = () => {
   <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
     <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
       <div className="hidden lg:relative lg:block lg:p-12">
-        <a className="block text-white" href="#">
+        
           <span className="sr-only">Home</span>
           <svg
             className="h-8 sm:h-10"
@@ -51,7 +51,7 @@ const SignUp = () => {
               fill="currentColor"
             />
           </svg>
-        </a>
+      
 
         <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
           Welcome to Fz Transfer ✈️
@@ -110,12 +110,13 @@ const SignUp = () => {
 
             <input
               type="password"
+              autoComplete='new-password'
               onChange={(event)=>{setpassword(event.target.value)}}
               className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>   
           <div className="col-span-6">
-            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Confirm Password </label>
+            <label htmlFor="Confirm Password" className="block text-sm font-medium text-gray-700"> Confirm Password </label>
 
             <input
               type="password"

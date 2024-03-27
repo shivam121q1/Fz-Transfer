@@ -1,7 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GoogleButton from 'react-google-button'
 
 const Login = () => {
+
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+
+  const RegisterHandeler = () => {
+
+    const parsedresp = (data) => {
+        console.log("User data is : " ,data)
+    }
+    const response = (resp) => {
+        resp.json().then(parsedresp);
+    }
+    fetch("http://localhost:4000/api/v1/Login" ,{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "email": email,
+            "password": password,
+          
+          }) 
+    }).then(response)
+    .catch(
+        console.log("Error occured while posting the data")
+    )
+}
+
+
+
+
+
   return (
     <div className='h-screen w-screen p-8 flex justify-center items-center'>
         <div className='h-3/4 w-96 bg-white shadow-2xl p-4 border rounded-md'>
@@ -15,16 +47,24 @@ const Login = () => {
 
           <div className='flex gap-3 flex-col'>
             <label>Email</label>
-            <input className='border p-4' type="text" placeholder='Enter Username' />
+            <input className='border p-4' 
+            type="text"
+            placeholder='Enter Username' 
+            onChange={(event)=>{setEmail(event.target.value)}}
+             />
           </div>
 
           <div className='flex gap-3 flex-col mt-8'>
             <label>Password</label>
-            <input className='border p-4' type="text" placeholder='Enter Username' />
+            <input className='border p-4'
+             type="text" 
+             placeholder='Enter Username' 
+             onChange={(event)=>{setPassword(event.target.value)}}
+             />
           </div>
 
           <div className='flex justify-center'>
-            <button className='border p-2 mt-4 bg-blue-500 text-white rounded-md'>Login</button>
+            <button className='border p-2 mt-4 bg-blue-500 text-white rounded-md' onClick={RegisterHandeler}>Login</button>
           </div>
         </div>
     </div>
