@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import FileDialog from './FileDialog';
 
 const Dropzone = () => {
   const [File , setFile] = useState();
-  const FileInputhandeler = () => {
-    const file = document.getElementById('dropzone-file').files[0];
-    if(file){
-      setFile(file);
-      console.log(file);
+    const UploadHandeler = async() =>{
+
+    const formData = new FormData();
+    formData.append('file', File);
+
+    try {
+      const response = await axios.post('http://localhost:4000/api/v1/FileUplaod', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      console.log('File uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
     }
-  }
-  const UploadHandeler = () =>{
-    alert("Working on it")
+
   }
   return (
     <div className='pt-32 ml-44 mr-44'>
@@ -24,7 +33,9 @@ const Dropzone = () => {
                     <p class="mb-2 text-lg text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or <strong className='text-main'>drag</strong> and <strong className='text-main'>drop</strong></p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG, PDF, Docx or GIF (MAX SIZE 100MB)</p>
                 </div>
-                <input onChange={FileInputhandeler} id="dropzone-file" type="file" class="hidden" />
+                <input onChange={(event)=> {
+                  setFile(event.target.files[0])
+                } } id="dropzone-file" type="file" class="hidden" />
             </label>
         </div> 
 
