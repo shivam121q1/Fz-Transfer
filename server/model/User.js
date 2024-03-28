@@ -17,7 +17,12 @@ const UserModel = new mongoose.Schema({
     number:{
         type: Number,
         required: true,
-    }
+    },
+    Files:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "File",
+    }]
+
 })
 
 module.exports = mongoose.model("User",UserModel);

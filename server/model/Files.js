@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const DataModel = new mongoose.Schema({
+const Files = new mongoose.Schema({
     filename: {
         type: String,
         required: true
@@ -27,4 +27,4 @@ const DataModel = new mongoose.Schema({
     }
 })
 
-model.exports = mongoose.model('Data',DataModel)
+model.exports = mongoose.model('File',Files)

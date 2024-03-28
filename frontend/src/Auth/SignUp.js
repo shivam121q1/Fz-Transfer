@@ -177,7 +177,9 @@ const SignUp = () => {
           </div>  }
 
 
-            {OTP?<button onClick={verifyOTP}>verify</button>:<button onClick={sendOtp}>SendOtp</button>}
+            {OTP?
+            <button className='border rounded-sm p-2 rounded-r-lg bg-gray-900 text-white' onClick={verifyOTP}>Verify OTP</button>:<button className='border rounded-r-lg p-2 bg-gray-900 text-white' onClick={sendOtp}>Verify Email</button>
+            }
             </div>
             
 
@@ -215,7 +217,7 @@ const SignUp = () => {
             <button
             disabled={disbaleds}
             onClick={RegisterHandeler}
-              className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+              className={`${disbaleds==true? 'cursor-not-allowed':null} inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500`}
             >
               Create an account
             </button>
