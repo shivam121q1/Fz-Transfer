@@ -13,18 +13,18 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard/>}/>
-        // Login Route
+        {/* // Login Route */}
         <Route path="/Login" element={<Login/>}/>
 
-        // Register or Signup Route
+        {/* // Register or Signup Route */}
         <Route path="/Signup" element={<SignUp/>}/>
-        // Login Router
+        {/* // Login Router */}
         <Route path="/Dashboard" element={<Dashboard/>}/>
-        // Login Router
+        {/* // Login Router */}
         <Route path="/Login" element={<Login/>}/>
-        // Upload Route
+        {/* // Upload Route */}
         <Route path="/Upload" element={<Upload/>}/>
-        // Files Route
+        {/* // Files Route */}
         <Route path="/Files" element={<Files/>}/>
 
       </Routes>
