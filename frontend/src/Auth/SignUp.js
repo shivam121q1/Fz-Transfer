@@ -39,11 +39,7 @@ const SignUp = () => {
     }).then(response).catch((e)=>{
       console.log(e.message);
     })
-  
-
     }
-
-
 
     const sendOtp = ()=>{
 
@@ -54,8 +50,6 @@ const SignUp = () => {
           
         }
     }
-
-
 
       const response = (resp) => {
         resp.json().then(parsedresp);
@@ -73,8 +67,6 @@ const SignUp = () => {
     }).then(response).catch((e)=>{
       console.log(e.message);
     })
-  
-
     }
     
     const RegisterHandeler = () => {
