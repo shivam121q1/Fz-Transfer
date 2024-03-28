@@ -7,6 +7,75 @@ const SignUp = () => {
     const [password,setpassword] = useState();
     const [confirmPassword,setconfirmPassword] = useState();
     const [phonenumber,setphonenumber] = useState();
+    const [OTP,setOTP] = useState(false);
+    const [otpValue,setotpValue] = useState();
+    const [disbaleds ,setDisbaleds] = useState(true);
+    const verifyOTP = ()=>{
+
+      const parsedresp = (data) => {
+        console.log("User data is : " ,data)
+        if(data.success){
+          setDisbaleds(false);
+        }
+        
+    }
+
+
+
+      const response = (resp) => {
+        resp.json().then(parsedresp);
+    }
+
+
+      fetch("http://localhost:4000/api/v1/verifyOtp" ,{
+        method : "POST",
+        headers:{
+          'Content-Type': 'application/json', 
+        },
+        body:JSON.stringify({
+          "otp":otpValue,
+          "email":email,
+      })
+    }).then(response).catch((e)=>{
+      console.log(e.message);
+    })
+  
+
+    }
+
+
+
+    const sendOtp = ()=>{
+
+      const parsedresp = (data) => {
+        console.log("User data is : " ,data)
+        if(data.success){
+          setOTP(true);
+          
+        }
+    }
+
+
+
+      const response = (resp) => {
+        resp.json().then(parsedresp);
+    }
+
+
+      fetch("http://localhost:4000/api/v1/sendOTP" ,{
+        method : "POST",
+        headers:{
+          'Content-Type': 'application/json', 
+        },
+        body:JSON.stringify({
+          "email":email,
+      })
+    }).then(response).catch((e)=>{
+      console.log(e.message);
+    })
+  
+
+    }
     
     const RegisterHandeler = () => {
 
@@ -98,11 +167,28 @@ const SignUp = () => {
           <div className="col-span-6">
             <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
 
+            <div>
             <input
               type="email"
               onChange={(event)=>{setemail(event.target.value)}}
               className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
+            {OTP && <div className="col-span-6">
+            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> OTP </label>
+
+            <input
+              type="password"
+              autoComplete='new-password'
+              onChange={(event)=>{setotpValue(event.target.value)}}
+              className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+            />
+          </div>  }
+
+
+            {OTP?<button onClick={verifyOTP}>verify</button>:<button onClick={sendOtp}>SendOtp</button>}
+            </div>
+            
+
           </div>
 
           <div className="col-span-6">
@@ -135,6 +221,7 @@ const SignUp = () => {
           </div>   
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button
+            disabled={disbaleds}
             onClick={RegisterHandeler}
               className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
             >
