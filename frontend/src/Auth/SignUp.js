@@ -39,11 +39,7 @@ const SignUp = () => {
     }).then(response).catch((e)=>{
       console.log(e.message);
     })
-  
-
     }
-
-
 
     const sendOtp = ()=>{
 
@@ -54,8 +50,6 @@ const SignUp = () => {
           
         }
     }
-
-
 
       const response = (resp) => {
         resp.json().then(parsedresp);
@@ -73,8 +67,6 @@ const SignUp = () => {
     }).then(response).catch((e)=>{
       console.log(e.message);
     })
-  
-
     }
     
     const RegisterHandeler = () => {
@@ -193,6 +185,9 @@ const SignUp = () => {
               className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>  }
+
+
+            {OTP?<button onClick={verifyOTP}>verify</button>:<button onClick={sendOtp}>SendOtp</button>}
             </div>
             
 
@@ -230,7 +225,7 @@ const SignUp = () => {
             <button
             disabled={disbaleds}
             onClick={RegisterHandeler}
-              className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+              className={`${disbaleds==true? 'cursor-not-allowed':null} inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500`}
             >
               Create an account
             </button>
