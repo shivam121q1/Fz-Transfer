@@ -164,16 +164,26 @@ const SignUp = () => {
             />
           </div>
 
-          <div className="col-span-6">
-            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+          <div className="col-span-6 flex flex-col gap-5">
+            
 
-            <div>
+            <div className='flex flex-row justify-center items-center '>
+            <div className='w-96'>
+
+            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
             <input
               type="email"
               onChange={(event)=>{setemail(event.target.value)}}
-              className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              className="mt-1 w-full border h-10 p-4 rounded-l-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
-            {OTP && <div className="col-span-6">
+            </div>
+            <div>
+            {OTP?<button className=' mt-6 w-20 rounded-r-md p-2 bg-slate-600 text-white' onClick={verifyOTP}>verify</button>:<button className=' mt-6 w-20 rounded-r-md p-2 bg-slate-600 text-white' onClick={sendOtp}>SendOtp</button>}
+            </div>
+            </div>
+
+            <div>
+            {OTP && <div className="col-span-6 ">
             <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> OTP </label>
 
             <input
@@ -183,9 +193,6 @@ const SignUp = () => {
               className="mt-1 w-full border h-10 p-4 rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>  }
-
-
-            {OTP?<button onClick={verifyOTP}>verify</button>:<button onClick={sendOtp}>SendOtp</button>}
             </div>
             
 
