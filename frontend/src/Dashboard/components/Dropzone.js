@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import FileDialog from './FileDialog';
+import {useNavigate} from 'react-router-dom';
 
 const Dropzone = () => {
+  const router = useNavigate();
   const [File , setFile] = useState();
     const UploadHandeler = async() =>{
-
+ 
     const formData = new FormData();
     formData.append('file', File);
 
@@ -16,7 +18,10 @@ const Dropzone = () => {
         }
       });
 
-      console.log('File uploaded successfully:', response.data);
+      // console.log(response.data.data.fileid);
+      setTimeout(() => {
+        router(`/filePreview/${response.data.data.fileid}`)
+      }, 2000);
     } catch (error) {
       console.error('Error uploading file:', error);
     }

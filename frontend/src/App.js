@@ -5,6 +5,7 @@ import {BrowserRouter , Route ,Routes} from 'react-router-dom'
 import Dashboard from './Dashboard/Dashboard';
 import Upload from './Dashboard/Upload';
 import Files from './Dashboard/Files';
+import FilePreview from './Dashboard/FilePreview';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/Upload" element={<Upload/>}/>
         {/* // Files Route */}
         <Route path="/Files" element={<Files/>}/>
+        {/* // Files Preview route */}
+        <Route path="/filePreview/:fileid" element={<FilePreview/>}/>
 
       </Routes>
     </BrowserRouter>

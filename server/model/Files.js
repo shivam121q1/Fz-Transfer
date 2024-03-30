@@ -1,30 +1,26 @@
 const mongoose = require('mongoose')
 
 const Files = new mongoose.Schema({
+    fileid: {
+        type: Number,
+        required: true
+    },
     filename: {
         type: String,
         required: true
     },
-    fileSize:{
+    filesize:{
         type: Number,
         required: true
     },
-    fileType:{
+    filetype:{
         type: String,
         required: true
     },
-    sendername:{
-        type: String,
-        required: true
-    },
-    encryptPassword:{
-        type:String,
-        required: false
-    },
-    fileUrl:{
+    filepath:{
         type: String,
         required: true
     }
 })
 
-model.exports = mongoose.model('File',Files)
+module.exports = mongoose.model('File',Files)

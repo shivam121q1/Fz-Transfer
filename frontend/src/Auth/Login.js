@@ -15,8 +15,7 @@ const Login = () => {
       else{
         console.log("User not found");
         return;
-      }  
-      
+      }   
     }
     const response = (resp) => {
         resp.json().then(parsedresp);

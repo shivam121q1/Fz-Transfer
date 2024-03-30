@@ -197,40 +197,40 @@ exports.sendOtp = async (req,res)=>{
 }
 exports.verifyOtp = async(req,res)=>{
     try {
-        const {otp,email} =req.body;
+            const {otp,email} =req.body;
 
-    if(!otp){
-        return res.status(400).json({
-            success:false,
-            message:"Enter the otp"
-        })
-    }
+            if(!otp){
+                return res.status(400).json({
+                    success:false,
+                    message:"Enter the otp"
+                })
+            }
 
-    const recentOTP =await OTP.find({email}).sort({ createdAt: -1 }).limit(1);
+            const recentOTP =await OTP.find({email}).sort({ createdAt: -1 }).limit(1);
 
-    console.log(recentOTP)
-    console.log(otp)
-    console.log(recentOTP[0].otp)
+            console.log(recentOTP)
+            console.log(otp)
+            console.log(recentOTP[0].otp)
 
-    if(recentOTP.length == 0){
-        //OTP not found
-        return res.status(400).json({
-            success:false,
-            message:"OTP not found"
-        })
-    } else if(otp!= recentOTP[0].otp){
-        //Invalid OTP
-        return res.status(400).json({
-            success:false,
-            message:"OTP not matching"
-        })
+            if(recentOTP.length == 0){
+                //OTP not found
+                return res.status(400).json({
+                    success:false,
+                    message:"OTP not found"
+                })
+            } else if(otp!= recentOTP[0].otp){
+                //Invalid OTP
+                return res.status(400).json({
+                    success:false,
+                    message:"OTP not matching"
+                })
 
-    }else{
-        return res.status(200).json({
-            success:true,
-            message:"OTP matched"
-        })
-    }
+            }else{
+                return res.status(200).json({
+                    success:true,
+                    message:"OTP matched"
+                })
+            }
         
     } catch (error) {
 
