@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import {useNavigate} from 'react-router-dom';
+import Popup from "./components/Popup"
 const SignUp = () => {
   const [Fname, setFname] = useState();
   const [Lname, setLname] = useState();
@@ -11,12 +12,25 @@ const SignUp = () => {
   const [otpValue, setotpValue] = useState();
   const [disbaleds, setDisbaleds] = useState(true);
   const [editable, setEditable] =useState(true);
+  const [showpopup , setshowpopup] = useState(false);
+  const [popuptitle , setpopuptitle] = useState("");
+  const [popupdesc,setpopupdesc] = useState("");
+
+
+  const router = useNavigate();
+
   const verifyOTP = () => {
     const parsedresp = (data) => {
       console.log("User data is : ", data);
       if (data.success) {
         setDisbaleds(false);
         setEditable(false)
+        setpopuptitle("Email Verified Successfully");
+        setpopupdesc("The Email has been verified successfully");
+        setshowpopup(true);
+        setTimeout(()=>{
+          setshowpopup(false);
+        },2000);
       }
     };
 
@@ -44,6 +58,12 @@ const SignUp = () => {
     const parsedresp = (data) => {
       console.log("User data is : ", data);
       if (data.success) {
+        setpopuptitle("OTP Sent Successfully");
+        setpopupdesc("The OTP was sent to you provided gmail id check out you gmail");
+        setshowpopup(true);
+        setTimeout(()=>{
+          setshowpopup(false);
+        },2000);
         setOTP(true);
       }
     };
@@ -68,8 +88,23 @@ const SignUp = () => {
   };
 
   const RegisterHandeler = () => {
+
+    if(!email || !password || !confirmPassword || !Fname || !Lname || !phonenumber) {
+      alert("Fill all fields");
+      return ;
+    }
+
     const parsedresp = (data) => {
       console.log("User data is : ", data);
+      setpopuptitle("Account Created");
+      setpopupdesc("The User registered successfully You can now Log In");
+      setshowpopup(true);
+      setTimeout(()=>{
+        setshowpopup(false);
+      },2000);
+      setInterval(() => {
+        router('/Login')
+      }, 2000);
     };
     const response = (resp) => {
       resp.json().then(parsedresp);
@@ -92,6 +127,11 @@ const SignUp = () => {
   };
   return (
     <section className="bg-white">
+
+      
+        {showpopup? <Popup title={popuptitle} desc={popupdesc}/> : null}
+      
+      
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <div className="hidden lg:relative lg:block lg:p-12">
@@ -203,7 +243,7 @@ const SignUp = () => {
 
                         {OTP ? (
                           <button
-                            className={`${disbaleds == false? "bg-green-600":"bg-gray-900"} border border-black w-32 mt-1 h-10 rounded-r-md  text-white`}
+                            className={`${disbaleds === false? "bg-green-600":"bg-gray-900"} border border-black w-32 mt-1 h-10 rounded-r-md  text-white`}
                             onClick={verifyOTP}
                           >
                             Verify OTP
@@ -274,7 +314,7 @@ const SignUp = () => {
                   disabled={disbaleds}
                   onClick={RegisterHandeler}
                   className={`${
-                    disbaleds == true ? "cursor-not-allowed" : null
+                    disbaleds === true ? "cursor-not-allowed" : null
                   } inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500`}
                 >
                   Create an account
