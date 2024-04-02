@@ -118,7 +118,7 @@ const SignUp = () => {
         email: email,
         password: password,
         confirmPassword: confirmPassword,
-        name: Fname + Lname,
+        name: Fname + " " + Lname,
         number: phonenumber,
       }),
     })
