@@ -6,6 +6,8 @@ import Dashboard from './Dashboard/Dashboard';
 import Upload from './Dashboard/Upload';
 import Files from './Dashboard/Files';
 import FilePreview from './Dashboard/FilePreview';
+import OpenRoute from './components/core/openRoute'; 
+ 
 
 function App() {
   return (
@@ -14,15 +16,21 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard/>}/>
-        {/* // Login Route */}
-        <Route path="/Login" element={<Login/>}/>
-
         {/* // Register or Signup Route */}
-        <Route path="/Signup" element={<SignUp/>}/>
+        <Route path="/Signup" element={
+          <OpenRoute>
+            <SignUp/>
+          </OpenRoute>
+        }/>
         {/* // Login Router */}
         <Route path="/Dashboard" element={<Dashboard/>}/>
         {/* // Login Router */}
-        <Route path="/Login" element={<Login/>}/>
+       
+          <Route path="/Login" element={
+            <OpenRoute>
+              <Login/>
+            </OpenRoute>}/>
+       
         {/* // Upload Route */}
         <Route path="/Upload" element={<Upload/>}/>
         {/* // Files Route */}

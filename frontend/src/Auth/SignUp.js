@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
-import Popup from "./components/Popup"
+import toast , {Toaster} from 'react-hot-toast'; 
+
+
+
 const SignUp = () => {
   const [Fname, setFname] = useState();
   const [Lname, setLname] = useState();
@@ -12,9 +15,6 @@ const SignUp = () => {
   const [otpValue, setotpValue] = useState();
   const [disbaleds, setDisbaleds] = useState(true);
   const [editable, setEditable] =useState(true);
-  const [showpopup , setshowpopup] = useState(false);
-  const [popuptitle , setpopuptitle] = useState("");
-  const [popupdesc,setpopupdesc] = useState("");
 
 
   const router = useNavigate();
@@ -27,12 +27,9 @@ const SignUp = () => {
       if (data.success) {
         setDisbaleds(false);
         setEditable(false)
-        setpopuptitle("Email Verified Successfully");
-        setpopupdesc("The Email has been verified successfully");
-        setshowpopup(true);
-        setTimeout(()=>{
-          setshowpopup(false);
-        },2000);
+        toast.success(data.message);
+      }else{
+        toast.error(data.message);
       }
     };
 
@@ -63,13 +60,10 @@ const SignUp = () => {
     const parsedresp = (data) => {
       console.log("User data is : ", data);
       if (data.success) {
-        setpopuptitle("OTP Sent Successfully");
-        setpopupdesc("The OTP was sent to you provided gmail id check out you gmail");
-        setshowpopup(true);
-        setTimeout(()=>{
-          setshowpopup(false);
-        },2000);
         setOTP(true);
+          toast.success(data.message); 
+      }else{
+        toast.error(data.message);
       }
     };
 
@@ -96,22 +90,18 @@ const SignUp = () => {
     e.preventDefault();
 
 
-    if(!email || !password || !confirmPassword || !Fname || !Lname || !phonenumber) {
-      alert("Fill all fields");
-      return ;
-    }
-
     const parsedresp = (data) => {
       console.log("User data is : ", data);
-      setpopuptitle("Account Created");
-      setpopupdesc("The User registered successfully You can now Log In");
-      setshowpopup(true);
-      setTimeout(()=>{
-        setshowpopup(false);
-      },2000);
-      setInterval(() => {
-        router('/Login')
-      }, 2000);
+
+      if(data.success === false){
+        toast.error(data.message);
+      }else{
+        toast.success(data.message);
+        setInterval(() => {
+          router('/Login')
+        }, 2000);
+      }
+      
     };
     const response = (resp) => {
       resp.json().then(parsedresp);
@@ -130,13 +120,13 @@ const SignUp = () => {
       }),
     })
       .then(response)
-      .catch(console.log("Error occured while posting the data"));
+      .catch(console.log("Error occurred while posting the data"));
   };
   return (
     <section className="bg-white">
 
       
-        {showpopup? <Popup title={popuptitle} desc={popupdesc}/> : null}
+        <Toaster/>
       
       
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">

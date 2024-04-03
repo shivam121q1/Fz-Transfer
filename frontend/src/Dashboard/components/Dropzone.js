@@ -46,6 +46,9 @@ const Dropzone = () => {
 
         {File ? <FileDialog src={File}/> : null}
         
+
+          
+
           <div className='flex justify-center w-full mt-8'>
             <button type="button"
             onClick={UploadHandeler}

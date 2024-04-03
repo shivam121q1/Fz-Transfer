@@ -60,6 +60,7 @@ exports.Login = async(req,res)=>{
             res.cookie("token",token,options).status(200).json({
                 success:true,
                 token,
+                message: "Logged in successfully",
                 user,
             })
         } else{
@@ -125,7 +126,7 @@ exports.Signup = async(req,res)=>{
     }catch(e){
         return res.status(500).json({
             success: false,
-            msg: "Error Occured while Signup",
+            msg: "Error Occurred while Signup",
             error: e.message
         })
     }
