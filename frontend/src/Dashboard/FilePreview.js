@@ -44,7 +44,7 @@ const FilePreview = () => {
 
   return (
     <div className='w-full h-full px-10 py-10 text-white bg-gray-900'>
-    <Link href = "/Upload" className='flex gap-3 border w-40 justify-center items-center p-2 rounded-lg '> <ArrowLeftSquare/> Go to Upload</Link>
+    <Link to = "/Upload" className='flex gap-3 border w-40 justify-center items-center p-2 rounded-lg '> <ArrowLeftSquare/> Go to Upload</Link>
 
     <div className='grid grid-col-2 mt-2 md:grid-cols-2 border-2 rounded-xl border-white'>
   

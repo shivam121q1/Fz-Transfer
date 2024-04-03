@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import {useNavigate, Link} from 'react-router-dom';
+import toast, {Toaster} from  'react-hot-toast';
 
 
 const Login = () => {
@@ -11,9 +12,15 @@ const Login = () => {
   const RegisterHandeler = () => {
 
     const parsedresp = (data) => {
-      if(data.success)  router('/Upload');
+      if(data.success){
+        toast.success(data.message);
+        setInterval(() => {
+          router('/Upload');
+        }, 2000);
+      }  
       else{
         console.log("User not found");
+        toast.error("User not Found");
         return;
       }   
     }
@@ -31,7 +38,7 @@ const Login = () => {
           
           }) 
     }).then(response).catch((err)=>{
-      console.log("Error occured while posting the Login data ",err);
+      console.log("Error occurred while posting the Login data ",err);
       return;
     })
     
@@ -39,6 +46,7 @@ const Login = () => {
 
   return (
     <div className='h-screen w-screen dark:bg-gray-900 p-8 flex justify-center items-center'>
+      <Toaster/>
         <div className='h-min-96 w-96 bg-gray-800 text-white shadow-2xl p-4 border rounded-md'>
           <h2 className='text-center text-2xl font-serif '>Login</h2>
           
@@ -70,7 +78,7 @@ const Login = () => {
             <button className='border p-2 mt-4 bg-blue-500 text-white rounded-md' onClick={RegisterHandeler}>Login</button>
           </div>
           <div className='mt-8 text-center'>
-            <span>Dont Have an Account? <Link to="/Signup" className='text-blue-600'>Create One</Link></span>
+            <span>Don't Have an Account? <Link to="/Signup" className='text-blue-600'>Create One</Link></span>
           </div>
         </div>
 
