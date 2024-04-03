@@ -19,7 +19,9 @@ const SignUp = () => {
 
   const router = useNavigate();
 
-  const verifyOTP = () => {
+  const verifyOTP = (e) => {
+    e.preventDefault();
+    
     const parsedresp = (data) => {
       console.log("User data is : ", data);
       if (data.success) {
@@ -54,7 +56,10 @@ const SignUp = () => {
       });
   };
 
-  const sendOtp = () => {
+  const sendOtp = (e) => {
+    e.preventDefault();
+
+
     const parsedresp = (data) => {
       console.log("User data is : ", data);
       if (data.success) {
@@ -87,7 +92,9 @@ const SignUp = () => {
       });
   };
 
-  const RegisterHandeler = () => {
+  const RegisterHandeler = (e) => {
+    e.preventDefault();
+
 
     if(!email || !password || !confirmPassword || !Fname || !Lname || !phonenumber) {
       alert("Fill all fields");
