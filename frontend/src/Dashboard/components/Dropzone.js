@@ -2,14 +2,18 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import FileDialog from './FileDialog';
 import {useNavigate} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const Dropzone = () => {
   const router = useNavigate();
   const [File , setFile] = useState();
+  const {token} = useSelector((state)=>state.auth)
+  console.log(token);
     const UploadHandeler = async() =>{
  
     const formData = new FormData();
     formData.append('file', File);
+    formData.append('token',token)
 
     try {
       const response = await axios.post('http://localhost:4000/api/v1/FileUplaod', formData, {

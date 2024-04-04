@@ -7,13 +7,16 @@ import Upload from './Dashboard/Upload';
 import Files from './Dashboard/Files';
 import FilePreview from './Dashboard/FilePreview';
 import OpenRoute from './components/core/openRoute'; 
+import Header from './Dashboard/components/Header';
  
 
 function App() {
   return (
+
     
 
     <BrowserRouter>
+       <Header />
       <Routes>
         <Route path="/" element={<Dashboard/>}/>
         {/* // Register or Signup Route */}

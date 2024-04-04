@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import {useNavigate, Link} from 'react-router-dom';
 import toast, {Toaster} from  'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../Slices/authSlice';
 
 
 const Login = () => {
   const router = useNavigate();
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const RegisterHandeler = () => {
 
@@ -15,6 +18,7 @@ const Login = () => {
       if(data.success){
         localStorage.setItem('token' ,JSON.stringify(data.token));
         toast.success(data.message);
+        
         setTimeout(() => {
           router('/Upload');
         }, 2000);

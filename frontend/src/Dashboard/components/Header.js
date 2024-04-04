@@ -3,8 +3,7 @@ import {useSelector,useDispatch} from "react-redux"
 import {setToken} from "../../Slices/authSlice.js"
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+
 
 
 const Header = () => {
@@ -17,7 +16,7 @@ const Header = () => {
     dispatch(setToken(null));
     console.log(token);
     localStorage.removeItem("token");
-    toast.success("Logout Successfully")
+    toast.success()
     setTimeout( () =>{
       navigate("/")
     },2000)
@@ -98,7 +97,7 @@ const Header = () => {
           </nav>
         </div> */}
   
-        {token !=null ? (<button onClick={Logout}> Logout</button>): (<div className="flex items-center gap-4">
+        {token != null ? (<button onClick={Logout}> Logout</button>): (<div className="flex items-center gap-4">
           <div className="sm:flex sm:gap-4"> 
             <a
               className="rounded-md bg-main px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"

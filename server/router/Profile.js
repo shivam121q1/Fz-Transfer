@@ -20,6 +20,7 @@ router.post('/FileUplaod',FileUpload);
 router.post('/filepreview/:fileid',filepreview);
 router.get('/filepreview/:fileid',DownlaodFile);
 router.post('/searchUser',searchUser)
+router.post("/sendFile",sendFile);
 
 
 

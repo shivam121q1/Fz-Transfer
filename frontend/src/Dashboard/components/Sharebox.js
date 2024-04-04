@@ -3,6 +3,38 @@ import React,{useState} from "react";
 
 const Sharebox = (props) => {
   const [user, setUser] = useState("");
+
+  const searchUser = ( )=>{
+    const parsedresp = (data) => {
+      console.log(data)
+      if(data.success){
+        // setName(data.)
+        
+      }  
+      else{
+        
+      }   
+    }
+    const response = (resp) => {
+        resp.json().then(parsedresp);
+    }
+    fetch("http://localhost:4000/api/v1/searchUser" ,{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "email": user
+            
+          
+          }) 
+    }).then(response).catch((err)=>{
+      console.log("Error occurred while posting the Login data ",err);
+      return;
+    })
+
+
+  }
   const handelclose = () => {
     props.Share(false);
   };
@@ -28,17 +60,7 @@ const Sharebox = (props) => {
 
         <ul className="mt-4 space-y-2">
           <li>
-            <a
-              href="#"
-              className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
-            >
-              <strong className="font-medium text-white">User A</strong>
-
-              <p className="mt-1 text-xs font-medium text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                consequuntur deleniti, unde ab ut in!
-              </p>
-            </a>
+            <button onClick={searchUser} className="bg-blue-600">Search user</button>
           </li>
 
           <li>
