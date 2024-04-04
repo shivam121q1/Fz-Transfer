@@ -8,6 +8,7 @@ const {auth} = require("../middleware/auth");
 const { FileUpload } = require('../controller/fileUpload');
 const {filepreview , DownlaodFile} = require('../controller/filepreview');
 const { searchUser } = require('../controller/SearchUser');
+const { sendFile } = require('../controller/sendFile');
 
 
 
