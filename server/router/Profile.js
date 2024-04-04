@@ -6,7 +6,8 @@ const {Dashboard}  = require('../controller/Dashboard')
 const {Login, Signup, sendOtp, verifyOtp} = require('../controller/Auth')
 const {auth} = require("../middleware/auth");
 const { FileUpload } = require('../controller/fileUpload');
-const {filepreview , DownlaodFile} = require('../controller/filepreview')
+const {filepreview , DownlaodFile} = require('../controller/filepreview');
+const { searchUser } = require('../controller/SearchUser');
 
 
 
@@ -17,7 +18,8 @@ router.post("/sendOTP",sendOtp);
 router.post("/verifyOtp",verifyOtp);
 router.post('/FileUplaod',FileUpload);
 router.post('/filepreview/:fileid',filepreview);
-router.get('/filepreview/:fileid',DownlaodFile)
+router.get('/filepreview/:fileid',DownlaodFile);
+router.get('/searchUser',searchUser)
 
 
 

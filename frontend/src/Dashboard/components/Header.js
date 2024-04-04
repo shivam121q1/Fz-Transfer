@@ -1,6 +1,27 @@
 import React from 'react'
+import {useSelector,useDispatch} from "react-redux"
+import {setToken} from "../../Slices/authSlice.js"
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {token} = useSelector((state)=>state.auth);
+  const Logout = ()=>{
+    dispatch(setToken(null));
+    console.log(token);
+    localStorage.removeItem("token");
+    toast.success("Logout Successfully")
+    setTimeout( () =>{
+      navigate("/")
+    },2000)
+  }
   return (
     <header className="bg-white dark:bg-gray-900 border-b border-main fixed w-screen">
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -77,8 +98,8 @@ const Header = () => {
           </nav>
         </div> */}
   
-        <div className="flex items-center gap-4">
-          <div className="sm:flex sm:gap-4">
+        {token !=null ? (<button onClick={Logout}> Logout</button>): (<div className="flex items-center gap-4">
+          <div className="sm:flex sm:gap-4"> 
             <a
               className="rounded-md bg-main px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"
               href="/Signup"
@@ -86,6 +107,7 @@ const Header = () => {
               Register
             </a>
           </div>
+          </div>)}
   
           <div className="block md:hidden">
             <button
@@ -103,7 +125,6 @@ const Header = () => {
               </svg>
             </button>
           </div>
-        </div>
       </div>
     </div>
   </header>
