@@ -3,10 +3,13 @@ const User = require("../model/User")
 exports.searchUser = async (req,res)=>{
     try {
         const {email}= req.body;
-        if(!email) return res.status(400).json({
-            success:false,
-            message:"Enter a email first"
-        })
+        if(!email){
+            return res.status(400).json({
+                success:false,
+                message:"Enter a email first"
+            })
+
+        } 
 
         const user =  await User.findOne({email})
 
@@ -20,7 +23,8 @@ exports.searchUser = async (req,res)=>{
         return res.status(200).json({
             success:true,
             message:"Successfully Searched",
-            user}
+            user
+        }
         )
             
     } catch (error) {

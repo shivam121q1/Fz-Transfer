@@ -19,7 +19,7 @@ router.post("/verifyOtp",verifyOtp);
 router.post('/FileUplaod',FileUpload);
 router.post('/filepreview/:fileid',filepreview);
 router.get('/filepreview/:fileid',DownlaodFile);
-router.get('/searchUser',searchUser)
+router.post('/searchUser',searchUser)
 
 
 
