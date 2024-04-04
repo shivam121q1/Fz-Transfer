@@ -64,7 +64,7 @@ const FilePreview = () => {
         <Fileimage file={file} share={opemmodalhandeler}></Fileimage>
         <Fileinfo file={file} />
 
-        {share === true ? <Sharebox Share={closeHanler} /> : null}
+        {share === true ? <Sharebox url = {`http://localhost:3000/filepreview/${file?.fileid}`} Share={closeHanler} /> : null}
       </div>
       <div className=""></div>
     </div>
