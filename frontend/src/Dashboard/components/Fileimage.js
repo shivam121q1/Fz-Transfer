@@ -7,6 +7,7 @@ const Fileimage = (props) => {
   const [show,setShow] = useState(false);
 
   const ShareHandeler = () => {
+    console.log(show)
     setShow(true);
     props.share(true);
   }

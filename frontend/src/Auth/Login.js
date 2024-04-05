@@ -12,14 +12,26 @@ const Login = () => {
   const [password,setPassword] = useState("");
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
   const RegisterHandeler = () => {
+=======
+  const RegisterHandeler = (e) => {
+    e.preventDefault();
+>>>>>>> upstream/main
 
     const parsedresp = (data) => {
       if(data.success){
         localStorage.setItem('token' ,JSON.stringify(data.token));
         toast.success(data.message);
+<<<<<<< HEAD
         
         setTimeout(() => {
+=======
+        dispatch(setToken(JSON.stringify(data.token)))
+        
+        setTimeout((e) => {
+          
+>>>>>>> upstream/main
           router('/Upload');
         }, 2000);
       }  
@@ -64,8 +76,13 @@ const Login = () => {
           <div className='flex gap-3 flex-col mt-8'>
             <label>Email</label>
             <input className='border p-4 text-gray-900 bg-gray-300' 
+<<<<<<< HEAD
             type="text"
             placeholder='Enter Username' 
+=======
+            type="email"
+            placeholder='Enter Email' 
+>>>>>>> upstream/main
             onChange={(event)=>{setEmail(event.target.value)}}
              />
           </div>
@@ -73,8 +90,13 @@ const Login = () => {
           <div className='flex gap-3 flex-col mt-8'>
             <label>Password</label>
             <input className='border p-4 text-gray-900 bg-gray-300'
+<<<<<<< HEAD
              type="text" 
              placeholder='Enter Username' 
+=======
+             type="password" 
+             placeholder='Enter Password' 
+>>>>>>> upstream/main
              onChange={(event)=>{setPassword(event.target.value)}}
              />
           </div>
