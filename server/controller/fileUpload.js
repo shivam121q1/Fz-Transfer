@@ -3,7 +3,10 @@ const Files = require('../model/Files')
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
+<<<<<<< HEAD
+=======
 const {jwtDecode} = require("jwt-decode")
+>>>>>>> upstream/main
 
 
 exports.FileUpload = async (req,res)=>{
@@ -25,10 +28,17 @@ exports.FileUpload = async (req,res)=>{
             fileid: Fid,
             filename: uploadedFile.name,
             filetype: uploadedFile.mimetype,
+<<<<<<< HEAD
+            filesize: uploadedFile.size/(8*1024),
+            filepath: path,
+        })
+        const decode = jwt.verify(token,process.env.JWT_SECRET);
+=======
             filesize: uploadedFile.size/(1024*1024),
             filepath: path,
         })
         const decode = jwtDecode(token);
+>>>>>>> upstream/main
         console.log(decode);
         const user =  await User.findByIdAndUpdate(decode.id,{Files:file._id});
         if(!user){

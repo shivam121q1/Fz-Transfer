@@ -106,7 +106,7 @@ const Sharebox = (props) => {
             <li>
               <a
                 href="#"
-                className="block h-full flex items-center justify-between rounded-lg border border-gray-700 p-4 hover:border-pink-600"
+                className="h-full flex items-center justify-between rounded-lg border border-gray-700 p-4 hover:border-pink-600"
               >
                 <div>
                   <strong className="font-medium text-white">
