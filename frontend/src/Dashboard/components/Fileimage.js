@@ -8,7 +8,7 @@ const Fileimage = (props) => {
 
   const ShareHandeler = () => {
     setShow(true);
-    props.share(show);
+    props.share(true);
   }
   const DownloadHandeler = async() => {
     try {

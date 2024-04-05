@@ -3,26 +3,34 @@ import axios from 'axios';
 import FileDialog from './FileDialog';
 import {useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import toast , {Toaster} from 'react-hot-toast'
 
 const Dropzone = () => {
   const router = useNavigate();
+
+  const [progressValue ,setProgressValue] = useState(0);
+  const [bar ,setbar] = useState(false);
+  
   const [File , setFile] = useState();
   const {token} = useSelector((state)=>state.auth)
   console.log(token);
+
     const UploadHandeler = async() =>{
- 
+    setbar(true);
     const formData = new FormData();
     formData.append('file', File);
-    formData.append('token',token)
+    formData.append('token',token);
 
     try {
       const response = await axios.post('http://localhost:4000/api/v1/FileUplaod', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: (progressEvent) => {
+          setProgressValue( Math.round((progressEvent.loaded / progressEvent.total)*100) + '%');
         }
       });
-
-      // console.log(response.data.data.fileid);
+      toast.success("File Uploaded Successfully");
       setTimeout(() => {
         router(`/filePreview/${response.data.data.fileid}`)
       }, 2000);
@@ -33,6 +41,7 @@ const Dropzone = () => {
   }
   return (
     <div className='pt-32 ml-44 mr-44'>
+      <Toaster/>
       <div class="flex items-center justify-center w-full">
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-blue-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -49,17 +58,29 @@ const Dropzone = () => {
         </div> 
 
         {File ? <FileDialog src={File}/> : null}
-        
-
-          
-
+            
           <div className='flex justify-center w-full mt-8'>
             <button type="button"
             onClick={UploadHandeler}
             className='flex gap-2 disabled:cursor-not-allowed justify-center items-center text-white bg-main hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'>Upload</button>
           </div>
           
+          {bar && <div className='w-full mt-8'>
+            <span id="ProgressLabel" className="sr-only">Loading</span>
 
+            <span
+                role="progressbar"
+                aria-labelledby="ProgressLabel"
+                aria-valuenow={progressValue}
+                className="relative block rounded-full bg-gray-200"
+            >
+                <span className="absolute inset-0 flex items-center justify-center text-[15px]/4">
+                <span className="font-semibold text-black"> {progressValue} % successful</span>
+                </span>
+
+                <span className="block h-4 rounded-full bg-indigo-600 text-center" style={{width: `${progressValue}`}}>  </span>
+            </span>
+        </div>}
     </div>
   )
 }

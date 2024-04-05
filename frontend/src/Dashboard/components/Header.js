@@ -16,9 +16,9 @@ const Header = () => {
     dispatch(setToken(null));
     console.log(token);
     localStorage.removeItem("token");
-    toast.success()
+    toast.success("Logout Successfully");
     setTimeout( () =>{
-      navigate("/")
+      navigate("/");
     },2000)
   }
   return (
@@ -97,7 +97,7 @@ const Header = () => {
           </nav>
         </div> */}
   
-        {token != null ? (<button onClick={Logout}> Logout</button>): (<div className="flex items-center gap-4">
+        {token != null ? (<button className='text-main' onClick={Logout}> Logout</button>): (<div className="flex items-center gap-4">
           <div className="sm:flex sm:gap-4"> 
             <a
               className="rounded-md bg-main px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"

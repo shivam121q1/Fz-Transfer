@@ -1,5 +1,6 @@
 import { Send, X } from "lucide-react";
 import React, { useState } from "react";
+import toast , {Toaster} from 'react-hot-toast'
 
 const Sharebox = (props) => {
   const [userdata, setUser] = useState("");
@@ -11,7 +12,9 @@ const Sharebox = (props) => {
     
     const parsedresp = (data) => {
       if(data.success){
-        console.log("Mail send ", data);
+        toast.success(data.msg);
+      }else{
+        toast.error(data.msg)
       }
     }
     
@@ -28,8 +31,9 @@ const Sharebox = (props) => {
         email: userdata,
         url: props?.url,
       }),
-    }).then(response).catch((Error)=>{
-      console.log(Error)
+    }).then(response)
+    .catch((Error)=>{
+      toast.error(Error.message);
     })
 
 
@@ -68,6 +72,7 @@ const Sharebox = (props) => {
   };
   return (
     <div className="z-10 absolute flex bg-transparent justify-center items-center left-1/3 top-10 shadow-lg">
+      <Toaster/>
       <article className="rounded-xl border border-gray-700 bg-gray-800 p-4 w-96">
         <div className="flex items-center justify-center gap-8">
           <X
